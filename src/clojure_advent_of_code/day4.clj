@@ -1,6 +1,7 @@
 (ns clojure-advent-of-code.day4)
 
 (def input [171309 643603])
+
 (defn has-same-adjacent-digits [pass]
   (loop [n 0]
     (if (= n 5)
@@ -10,7 +11,7 @@
         (recur (inc n))))))
 
 (defn digits-doesnt-decrease [pass]
-  (apply <= (map #((comp read-string str) %1) pass)))
+  (apply <= (map #((comp read-string str) %) pass)))
 
 (defn solution []
   (loop [i (first input) count 0]
