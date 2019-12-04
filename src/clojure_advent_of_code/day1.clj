@@ -7,7 +7,7 @@
                            ]
                        (->> contents
                             clojure.string/split-lines
-                            (map clojure.edn/read-string)))
+                            (map read-string)))
   )
 
 (defn compute-fuel [mass] (- (Math/floor (/ mass 3)) 2))
