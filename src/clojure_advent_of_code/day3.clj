@@ -4,13 +4,13 @@
 (defn read-path [path] (let [moves (read-string (subs path 1))]
                          [(keyword (str (first path))) moves]))
 
-(defn get-wires [] (let [contents
-                         (-> (io/resource "input3.txt")
-                             slurp)]
-                     (->> contents
-                          clojure.string/split-lines
-                          (map #(clojure.string/split % #","))
-                          (map #(map read-path %)))))
+(defn get-wires []
+  (let [contents
+        (slurp (io/resource "input3.txt"))]
+    (->> contents
+         clojure.string/split-lines
+         (map #(clojure.string/split % #","))
+         (map #(map read-path %)))))
 
 (defn path-move [[[dir dist] & path]]
   (if (= dist 1)
@@ -27,10 +27,10 @@
 
 (defn point-path-move-1dist [[x y] [[dir] :as path]]
   (let [new-point (case dir
-                    :U [x (+ y 1)]
-                    :D [x (- y 1)]
-                    :R [(+ x 1) y]
-                    :L [(- x 1) y])]
+                    :U [x (inc y)]
+                    :D [x (dec y)]
+                    :R [(inc x) y]
+                    :L [(dec x) y])]
     [new-point (path-move path)]))
 
 (defn point-line-intersect? [[x y] [[sx sy] [ex ey]]]
@@ -44,7 +44,7 @@
       false
       (let [[new-pos new-path] (point-path-move pos path)]
         (if (point-line-intersect? point [pos new-pos])
-          (+ steps (+ (abs (- (first point) (first pos))) (abs (- (second point) (second pos)))))
+          (+ steps (abs (- (first point) (first pos))) (abs (- (second point) (second pos))))
           (recur new-pos new-path (+ steps (second (first path)))))))))
 
 (defn intersections []

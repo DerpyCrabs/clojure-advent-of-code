@@ -1,12 +1,11 @@
 (ns clojure-advent-of-code.day2
   (:require [clojure.java.io :as io]))
 
-(defn get-code [] (let [contents
-                        (-> (io/resource "input2.txt")
-                            slurp)]
-                    (->> contents
-                         (#(clojure.string/split % #","))
-                         (map read-string))))
+(defn get-code []
+  (let [contents (slurp (io/resource "input2.txt"))]
+    (->> contents
+         (#(clojure.string/split % #","))
+         (map read-string))))
 
 (defn interpreter [code]
   (loop [instruction-pointer 0 state code]
