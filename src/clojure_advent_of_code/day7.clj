@@ -103,6 +103,13 @@
             o3 (thruster c3 c4 t3)
             o4 (thruster c4 c5 t4)
             o5 (thruster c5 c1 t5)
+            _ (go
+                (>! c1 t1)
+                (>! c2 t2)
+                (>! c3 t3)
+                (>! c4 t4)
+                (>! c5 t5)
+                (>! c1 0))
             output (do
                      (<!! o1)
                      (<!! o2)
@@ -110,13 +117,6 @@
                      (<!! o4)
                      (<!! o5)
                      (<!! c1))]
-        (go
-          (>! c1 t1)
-          (>! c2 t2)
-          (>! c3 t3)
-          (>! c4 t4)
-          (>! c5 t5)
-          (>! c1 0))
         (if (> output highest-signal)
           (recur rest output)
           (recur rest highest-signal))))))
