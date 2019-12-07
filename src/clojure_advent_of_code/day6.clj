@@ -5,14 +5,13 @@
   (let [contents (slurp (io/resource "input6.txt"))]
     (->> contents
          clojure.string/split-lines
-         (map #(clojure.string/split % #"\)"))
-         )))
+         (map #(clojure.string/split % #"\)")))))
 
 (defn construct-tree [data object]
   (let [orbiters (filter #(= (first %) object) data)]
     (vector object
-           (reduce #(conj %1 [(first %2) (second %2)]) []
-                   (map #(construct-tree data %) (map second orbiters))))))
+            (reduce #(conj %1 [(first %2) (second %2)]) []
+                    (map #(construct-tree data %) (map second orbiters))))))
 
 (defn get-orbits [tree level]
   (+ level (reduce #(+ %1 (get-orbits %2 (inc level))) 0 (second tree))))
@@ -39,5 +38,4 @@
         (concat (reverse path1) path2)))))
 
 (defn solution2 []
-  (- (count (path-between-objects (construct-tree (get-map-data) "COM") "YOU" "SAN")) 2)
-  )
+  (- (count (path-between-objects (construct-tree (get-map-data) "COM") "YOU" "SAN")) 2))
