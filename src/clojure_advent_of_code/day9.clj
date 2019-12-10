@@ -9,7 +9,10 @@
          (map read-string))))
 
 (defn parse-opcode [opcode]
-  [(rem opcode 100) (rem (quot opcode 100) 10) (rem (quot opcode 1000) 10) (quot opcode 10000)])
+  [(rem opcode 100)
+   (rem (quot opcode 100) 10)
+   (rem (quot opcode 1000) 10)
+   (quot opcode 10000)])
 
 (defn interpreter [code input output]
   (go-loop

@@ -22,7 +22,7 @@
   (apply mapv vector m))
 
 (defn pixel-value [values]
-  (first (drop-while #(= \2 %) values)))
+  (some #(not= \2 %) values))
 
 (defn solution2 []
   (let [layers (get-layers)

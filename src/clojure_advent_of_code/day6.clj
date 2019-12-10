@@ -32,10 +32,9 @@
 (defn path-between-objects [tree obj1 obj2]
   (let [obj1-path (find-object tree obj1)
         obj2-path (find-object tree obj2)]
-    (loop [path1 obj1-path path2 obj2-path]
-      (if (= (first path1) (first path2))
-        (recur (rest path1) (rest path2))
-        (concat (reverse path1) path2)))))
+    (->> (map vector obj1-path obj2-path)
+         (drop-while #(= (first %) (second %)))
+         (map #(concat (reverse (first %)) (second %))))))
 
 (defn solution2 []
   (- (count (path-between-objects (construct-tree (get-map-data) "COM") "YOU" "SAN")) 2))
