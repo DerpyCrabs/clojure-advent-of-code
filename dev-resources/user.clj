@@ -8,6 +8,7 @@
   (:require [clojure-advent-of-code.day7 :as day7])
   (:require [clojure-advent-of-code.day8 :as day8])
   (:require [clojure-advent-of-code.day9 :as day9])
+  (:require [clojure-advent-of-code.day10 :as day10])
   )
 
 
